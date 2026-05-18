@@ -12,11 +12,21 @@ type Book = {
 
 export default async function Home({searchParams}: {searchParams: Promise<{q?: string}>}) {
   const {q} = await searchParams;
-  const bookRes = await fetch(`http://localhost:8080/api/books?q=${q ?? ""}`);
+  let status;
+  let books: Book[] = [];
+  try {
+    const bookRes = await fetch(`http://localhost:8080/api/books?q=${q ?? ""}`);
+    status = bookRes.status;
+    if(status === 200) {
+      books = await bookRes.json();
+    }
+  } catch (error) {
+    status = 500;
+  }
+
   let element;
 
-  if (bookRes.status == 200) {
-    const books: Book[] = await bookRes.json();
+  if (status == 200) {
     element = (books.map((book: Book) => (
       <BookCard
         key={book.id}
@@ -27,7 +37,7 @@ export default async function Home({searchParams}: {searchParams: Promise<{q?: s
         available={book.available}/>
     )));
   }
-  else if(bookRes.status == 204) {
+  else if(status == 204) {
     element = (
       <p className="text-red-500 text-lg font-semibold my-10">검색 결과가 없습니다.</p>
     )

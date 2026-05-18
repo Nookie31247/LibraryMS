@@ -35,14 +35,21 @@ const ModifyComponent = (
     if (!confirm("수정하시겠습니까?"))
       return;
 
-    const res = await fetch(`http://localhost:8080/api/books/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({id, title, author, price, available})
-    });
-    if (res.status === 200) {
+    let status;
+    try {
+      const res = await fetch(`http://localhost:8080/api/books/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({id, title, author, price, available})
+      });
+      status = res.status;
+    } catch (err) {
+      status = 500;
+    }
+
+    if (status === 200) {
       alert("정보를 수정했습니다.")
       setIsActive(false);
       router.refresh();

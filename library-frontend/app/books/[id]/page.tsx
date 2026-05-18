@@ -13,11 +13,20 @@ type Book = {
 const BookPage = async ({params}: {params: Promise<{id: number}>}) => {
   const {id} = await params;
   const spanClass = "text-gray-600";
-  const bookRes = await fetch(`http://localhost:8080/api/books/${id}`);
+  let status;
+  let book = {} as Book;
   let element;
+  try {
+    const bookRes = await fetch(`http://localhost:8080/api/books/${id}`);
+    status = bookRes.status;
+    if(status === 200) {
+      book = await bookRes.json();
+    }
+  } catch (error) {
+    status = 500;
+  }
 
-  if(bookRes.status == 200) {
-    const book: Book = await bookRes.json();
+  if(status == 200) {
     element = (
       <>
       <h5 className="font-semibold mx-2 text-gray-500 mb-2">검색 결과</h5>
@@ -45,7 +54,7 @@ const BookPage = async ({params}: {params: Promise<{id: number}>}) => {
     </>
     );
   }
-  else if(bookRes.status == 404) {
+  else if(status == 404) {
     element = (
       <>
         <p className="text-red-500 text-lg font-semibold my-10">ID 번호 에러</p>

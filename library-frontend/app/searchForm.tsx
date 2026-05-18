@@ -19,7 +19,7 @@ const SearchForm = () => {
     <form className="flex gap-2 my-2" onSubmit={(e) => e.preventDefault()}>
       <input
         className="border border-gray-600 rounded-xl p-2 flex-1"
-        placeholder="검색어를 입력하세요"
+        placeholder="검색하고자 하는 제목/작가를 입력하세요"
         required
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && search()}

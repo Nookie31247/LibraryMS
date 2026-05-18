@@ -11,31 +11,41 @@ type Book = {
 }
 
 export default async function Home() {
-  const bookRes = await fetch("http://localhost:8080/api/books");
-  let element;
+  let element: React.ReactNode;
+  let status;
+  let books: Book[] = []
 
-  if (bookRes.status == 200) {
-    const books: Book[] = await bookRes.json();
-    element = (books.map((book: Book) => (
-      <BookCard
-        key={book.id}
-        id={book.id}
-        title={book.title}
-        author={book.author}
-        price={book.price}
-        available={book.available}/>
-    )));
+  try {
+    const bookRes = await fetch("http://localhost:8080/api/books");
+    status = bookRes.status;
+    if(status === 200) {
+      books = await bookRes.json();
+    }
+  } catch (error) {
+    status = 500;
   }
-  else if(bookRes.status == 204) {
-    element = (
-      <p className="text-red-500 text-lg font-semibold my-10">저장된 도서가 없습니다.</p>
-    )
-  }
-  else {
-    element = (
-      <p className="text-red-500 text-lg font-semibold my-10">서버 오류가 발생했습니다.</p>
-    )
-  }
+
+  if (status == 200) {
+      element = (books.map((book: Book) => (
+        <BookCard
+          key={book.id}
+          id={book.id}
+          title={book.title}
+          author={book.author}
+          price={book.price}
+          available={book.available}/>
+      )));
+    }
+    else if(status == 204) {
+      element = (
+        <p className="text-red-500 text-lg font-semibold my-10">저장된 도서가 없습니다.</p>
+      )
+    }
+    else {
+      element = (
+        <p className="text-red-500 text-lg font-semibold my-10">서버 오류가 발생했습니다.</p>
+      )
+    }
 
   return (
     <>

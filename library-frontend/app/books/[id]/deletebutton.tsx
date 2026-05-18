@@ -1,19 +1,31 @@
 "use client"
 
 import {useRouter} from "next/navigation";
+import {error} from "next/dist/build/output/log";
 
 const DeleteButton = ({ id }: { id: number }) => {
   const router = useRouter();
 
   const deleteBook = async () => {
-    if(!confirm("정말 삭제하시겠습니까?"))
+    if (!confirm("정말 삭제하시겠습니까?"))
       return;
 
-    await fetch(`http://localhost:8080/api/books/${id}`, {
-      method: "DELETE"
-    });
+    let status;
+    try {
+      const result = await fetch(`http://localhost:8080/api/books/${id}`, {
+        method: "DELETE"
+      });
+      status = result.status;
+    } catch (error) {
+      status = 500;
+    }
 
-    router.push("/");
+    if (status === 204) {
+      alert("삭제되었습니다.");
+      router.push("/");
+    } else {
+      alert("삭제에 실패했습니다.");
+    }
   }
 
   return(

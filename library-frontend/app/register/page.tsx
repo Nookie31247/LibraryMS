@@ -26,14 +26,21 @@ const RegisterPage = () => {
     if (!confirm("등록하시겠습니까?"))
       return;
 
-    const res = await fetch("http://localhost:8080/api/books", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({title, author, price, available})
-    });
-    if (res.status === 201) {
+    let status;
+    try {
+      const res = await fetch("http://localhost:8080/api/books", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({title, author, price, available})
+      });
+      status = res.status;
+    } catch (error) {
+      status = 500;
+    }
+
+    if (status === 201) {
       alert("등록에 성공했습니다.")
       router.push("/")
     }
