@@ -1,0 +1,63 @@
+# ==========================================
+# Compiled & Build Output
+# ==========================================
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# ==========================================
+# Gradle
+# ==========================================
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ==========================================
+# Maven
+# ==========================================
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ==========================================
+# Logs
+# ==========================================
+*.log
+logs/
+
+# ==========================================
+# Spring Boot
+# ==========================================
+spring-shell.log
+
+# ==========================================
+# Sensitive Configuration Files
+# ==========================================
+# application secrets (keep templates/examples)
+**/application-secret*.yml
+**/application-secret*.yaml
+**/application-secret*.properties
+**/application-local*.yml
+**/application-local*.yaml
+**/application-local*.properties
+
+# ==========================================
+# H2 Database (embedded)
+# ==========================================
+*.db
+
+# ==========================================
+# Package files
+# ==========================================
+*.jar
+*.war
+*.nar
+*.ear
