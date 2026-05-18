@@ -10,8 +10,9 @@ type Book = {
   available: boolean;
 }
 
-export default async function Home() {
-  const bookRes = await fetch("http://localhost:8080/api/books");
+export default async function Home({searchParams}: {searchParams: Promise<{q?: string}>}) {
+  const {q} = await searchParams;
+  const bookRes = await fetch(`http://localhost:8080/api/books?q=${q ?? ""}`);
   let element;
 
   if (bookRes.status == 200) {
@@ -28,7 +29,7 @@ export default async function Home() {
   }
   else if(bookRes.status == 204) {
     element = (
-      <p className="text-red-500 text-lg font-semibold my-10">저장된 도서가 없습니다.</p>
+      <p className="text-red-500 text-lg font-semibold my-10">검색 결과가 없습니다.</p>
     )
   }
   else {
@@ -36,15 +37,16 @@ export default async function Home() {
       <p className="text-red-500 text-lg font-semibold my-10">서버 오류가 발생했습니다.</p>
     )
   }
+    
 
   return (
     <>
       <div className="flex justify-between">
-        <h3 className="text-2xl font-bold ml-2 pt-1 text-[#EF6C33]">전체 책 목록</h3>
+        <h3 className="text-2xl font-bold ml-2 pt-1 text-[#EF6C33]">검색 결과</h3>
         <Link
-          href={`/register`}
-          className="p-2 inline-block bg-green-300 rounded-xl mr-2 mb-2 hover:bg-green-400"
-        >책 등록하기</Link>
+          href={`/`}
+          className="p-2 inline-block bg-blue-300 rounded-xl mr-2 mb-2 hover:bg-blue-400"
+        >돌아가기</Link>
       </div>
       <SearchForm/>
       <div className="border border-dashed border-gray-500 rounded-2xl px-4 py-2">

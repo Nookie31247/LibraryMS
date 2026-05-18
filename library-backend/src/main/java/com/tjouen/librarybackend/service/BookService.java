@@ -17,20 +17,7 @@ public class BookService {
 
     /// 전체 도서를 반환합니다.
     public List<BookResponseDTO> getAllBooks() {
-        List<Book> books = repository.findAll();
-        List<BookResponseDTO> bookResponseDTOList = new ArrayList<>();
-        books.forEach(book -> {
-            bookResponseDTOList.add(
-                    BookResponseDTO.builder()
-                        .id(book.getId())
-                        .title(book.getTitle())
-                        .author(book.getAuthor())
-                        .price(book.getPrice())
-                        .available(book.getAvailable())
-                        .build()
-            );
-        });
-        return bookResponseDTOList;
+        return entityToDto(repository.findAll());
     }
 
     /// id를 기반으로 도서를 찾아서 반환합니다.
@@ -82,5 +69,27 @@ public class BookService {
         );
         repository.save(book);
         return true;
+    }
+
+    /// 도서 검색 결과를 반환합니다.
+    /// 전체 도서를 반환합니다.
+    public List<BookResponseDTO> getSearchedBooks(String query) {
+        return entityToDto(repository.searchByTitleOrAuthor(query));
+    }
+
+    private List<BookResponseDTO> entityToDto(List<Book> books) {
+        List<BookResponseDTO> bookResponseDTOList = new ArrayList<>();
+        books.forEach(book -> {
+            bookResponseDTOList.add(
+                BookResponseDTO.builder()
+                    .id(book.getId())
+                    .title(book.getTitle())
+                    .author(book.getAuthor())
+                    .price(book.getPrice())
+                    .available(book.getAvailable())
+                    .build()
+            );
+        });
+        return bookResponseDTOList;
     }
 }

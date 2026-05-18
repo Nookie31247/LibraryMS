@@ -1,5 +1,6 @@
 import Link from "next/link";
 import DeleteButton from "@/app/books/[id]/deletebutton";
+import ModifyComponent from "@/app/books/[id]/modifyComponent";
 
 type Book = {
   id: number;
@@ -13,10 +14,12 @@ const BookPage = async ({params}: {params: Promise<{id: number}>}) => {
   const {id} = await params;
   const spanClass = "text-gray-600";
   const bookRes = await fetch(`http://localhost:8080/api/books/${id}`);
-  const book: Book = await bookRes.json();
+  let element;
 
-  return (
-    <>
+  if(bookRes.status == 200) {
+    const book: Book = await bookRes.json();
+    element = (
+      <>
       <h5 className="font-semibold mx-2 text-gray-500 mb-2">검색 결과</h5>
       <h4 className="text-xl font-semibold m-2">{book.title}</h4>
       <ul className="list-disc ml-10 mr-2">
@@ -32,8 +35,40 @@ const BookPage = async ({params}: {params: Promise<{id: number}>}) => {
         href={`/`}
       >돌아가기</Link>
       <DeleteButton id={book.id}/>
+      <ModifyComponent
+        id={book.id}
+        beforeTitle={book.title}
+        beforeAuthor={book.author}
+        beforePrice={book.price}
+        beforeAvailable={book.available}
+      />
     </>
-  );
+    );
+  }
+  else if(bookRes.status == 404) {
+    element = (
+      <>
+        <p className="text-red-500 text-lg font-semibold my-10">ID 번호 에러</p>
+        <Link
+          className="bg-blue-300 p-2 rounded-xl mt-5 inline-block hover:bg-blue-400"
+          href={`/`}
+        >돌아가기</Link>
+      </>
+    );
+  }
+  else {
+    element = (
+      <>
+        <p className="text-red-500 text-lg font-semibold my-10">서버 에러 발생</p>
+        <Link
+          className="bg-blue-300 p-2 rounded-xl mt-5 inline-block hover:bg-blue-400"
+          href={`/`}
+        >돌아가기</Link>
+      </>
+    );
+  }
+
+  return (<>{element}</>);
 }
 
 export default BookPage;

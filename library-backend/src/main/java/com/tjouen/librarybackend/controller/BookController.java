@@ -17,8 +17,16 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping("/books")
-    public ResponseEntity<List<BookResponseDTO>> getBooks() {
-        List<BookResponseDTO> bookResponseDTOList = bookService.getAllBooks();
+    public ResponseEntity<List<BookResponseDTO>> getBooks(@RequestParam(required = false) String q) {
+        List<BookResponseDTO> bookResponseDTOList;
+
+        if(q == null){
+            bookResponseDTOList = bookService.getAllBooks();
+        }
+        else {
+            bookResponseDTOList = bookService.getSearchedBooks(q);
+        }
+        
         if (bookResponseDTOList.isEmpty())
             return ResponseEntity.noContent().build();
         else
