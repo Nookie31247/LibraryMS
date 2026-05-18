@@ -1,3 +1,6 @@
+# 시연 영상
+https://drive.google.com/file/d/1iaW1kPsjBTzsECAwE_Gs7x4XW3U1CtX9/view?usp=sharing
+
 # 도서 관리 프로그램
 도서를 손쉽게 관리할 수 있는 프로그램입니다.
 
