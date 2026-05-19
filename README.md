@@ -1,8 +1,8 @@
 # 시연 영상
-로컬 시연: https://drive.google.com/file/d/1iaW1kPsjBTzsECAwE_Gs7x4XW3U1CtX9/view?usp=sharing
-AWS 설정 및 시연 1: https://drive.google.com/file/d/1xzNTIrXp5D7Bk5Bjep24jWFGFS_qhuu1/view?usp=sharing
-AWS 설정 및 시연 2: https://drive.google.com/file/d/1wznZSZct9Nmae-d3xTVdohcOJoiw9D7f/view?usp=sharing
-
+로컬 시연: https://drive.google.com/file/d/1iaW1kPsjBTzsECAwE_Gs7x4XW3U1CtX9/view?usp=sharing<br/>
+AWS 설정 및 시연 1: https://drive.google.com/file/d/1xzNTIrXp5D7Bk5Bjep24jWFGFS_qhuu1/view?usp=sharing<br/>
+AWS 설정 및 시연 2: https://drive.google.com/file/d/1wznZSZct9Nmae-d3xTVdohcOJoiw9D7f/view?usp=sharing<br/>
+<br/>
 실제 접속해보기: https://nookie-server.store/
 
 # 도서 관리 프로그램
