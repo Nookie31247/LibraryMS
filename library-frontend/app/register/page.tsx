@@ -46,7 +46,7 @@ const RegisterPage = () => {
       router.push("/")
     }
     else {
-      alert("등록에 실패했습니다.")
+      alert(`등록에 실패했습니다. (${status})`)
     }
   }
 

@@ -56,7 +56,7 @@ const ModifyComponent = (
       router.refresh();
     }
     else {
-      alert("정보 수정을 실패했습니다.")
+      alert(`정보 수정을 실패했습니다. (${status})`);
     }
   }
 

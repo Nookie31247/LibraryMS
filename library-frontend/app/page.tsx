@@ -44,7 +44,7 @@ export default async function Home() {
     }
     else {
       element = (
-        <p className="text-red-500 text-lg font-semibold my-10">서버 오류가 발생했습니다.</p>
+        <p className="text-red-500 text-lg font-semibold my-10">서버 오류가 발생했습니다. ({status})</p>
       )
     }
 

@@ -69,7 +69,7 @@ const BookPage = async ({params}: {params: Promise<{id: number}>}) => {
   else {
     element = (
       <>
-        <p className="text-red-500 text-lg font-semibold my-10">서버 에러 발생</p>
+        <p className="text-red-500 text-lg font-semibold my-10">서버 에러 발생 ({status})</p>
         <Link
           className="bg-blue-300 p-2 rounded-xl mt-5 inline-block hover:bg-blue-400"
           href={`/`}
