@@ -5,11 +5,13 @@ phases:
     commands:
       # 기본 경로는 프로젝트 루트 폴더
       # npm install과 동일하지만 ci/cd에 더 좋음
-      - cd library-frontend && npm ci
+      - cd library-frontend
+      - npm ci
   build:
     commands:
       # Next.js 빌드
-      - cd library-frontend && npm run build
+      - npm run build
+      - cd ..
 
       # SpringBoot 빌드
       - chmod +x ./library-backend/gradlew
