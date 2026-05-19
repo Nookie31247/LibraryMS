@@ -3,6 +3,7 @@
 import {useState} from "react";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
+import {apiUrl} from "@/libs/api";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -28,7 +29,7 @@ const RegisterPage = () => {
 
     let status;
     try {
-      const res = await fetch("http://localhost:8080/api/books", {
+      const res = await fetch(apiUrl("/books"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import DeleteButton from "@/app/books/[id]/deletebutton";
 import ModifyComponent from "@/app/books/[id]/modifyComponent";
+import {apiUrl} from "@/libs/api";
 
 type Book = {
   id: number;
@@ -17,7 +18,7 @@ const BookPage = async ({params}: {params: Promise<{id: number}>}) => {
   let book = {} as Book;
   let element;
   try {
-    const bookRes = await fetch(`http://localhost:8080/api/books/${id}`);
+    const bookRes = await fetch(apiUrl(`books/${id}`));
     status = bookRes.status;
     if(status === 200) {
       book = await bookRes.json();

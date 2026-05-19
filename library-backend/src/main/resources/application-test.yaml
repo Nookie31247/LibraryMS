@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: library-backend
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    hikari:
+      username: sa
+      password:
+    url: jdbc:h2:mem:library
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+app:
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:3000}

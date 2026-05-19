@@ -1,6 +1,7 @@
 import BookCard from "@/components/BookCard";
 import Link from "next/link";
 import SearchForm from "@/app/searchForm";
+import {apiUrl} from "@/libs/api";
 
 type Book = {
   id: number;
@@ -16,7 +17,7 @@ export default async function Home() {
   let books: Book[] = []
 
   try {
-    const bookRes = await fetch("http://localhost:8080/api/books");
+    const bookRes = await fetch(apiUrl("http://localhost:8080/api/books"));
     status = bookRes.status;
     if(status === 200) {
       books = await bookRes.json();

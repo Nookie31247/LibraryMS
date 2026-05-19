@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
+import {apiUrl} from "@/libs/api";
 
 const ModifyComponent = (
   {id, beforeTitle, beforeAuthor, beforePrice, beforeAvailable}: {
@@ -37,7 +38,7 @@ const ModifyComponent = (
 
     let status;
     try {
-      const res = await fetch(`http://localhost:8080/api/books/${id}`, {
+      const res = await fetch(apiUrl(`/books/${id}`), {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

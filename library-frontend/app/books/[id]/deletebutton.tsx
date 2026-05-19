@@ -2,6 +2,7 @@
 
 import {useRouter} from "next/navigation";
 import {error} from "next/dist/build/output/log";
+import {apiUrl} from "@/libs/api";
 
 const DeleteButton = ({ id }: { id: number }) => {
   const router = useRouter();
@@ -12,7 +13,7 @@ const DeleteButton = ({ id }: { id: number }) => {
 
     let status;
     try {
-      const result = await fetch(`http://localhost:8080/api/books/${id}`, {
+      const result = await fetch(apiUrl(`/books/${id}`), {
         method: "DELETE"
       });
       status = result.status;
