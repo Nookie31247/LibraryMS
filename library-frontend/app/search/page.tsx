@@ -16,7 +16,7 @@ export default async function Home({searchParams}: {searchParams: Promise<{q?: s
   let status;
   let books: Book[] = [];
   try {
-    const bookRes = await fetch(apiUrl(`/books?q=${q ?? ""}`));
+    const bookRes = await fetch(apiUrl(`/books?q=${q ?? ""}`), {cache: 'no-store'});
     status = bookRes.status;
     if(status === 200) {
       books = await bookRes.json();

@@ -17,7 +17,7 @@ export default async function Home() {
   let books: Book[] = []
 
   try {
-    const bookRes = await fetch(apiUrl("/books"));
+    const bookRes = await fetch(apiUrl("/books"), {cache: 'no-store'});
     status = bookRes.status;
     if(status === 200) {
       books = await bookRes.json();
