@@ -1,1 +1,1 @@
-web: java -jar note-app.jar
+web: java -jar library-app.jar
