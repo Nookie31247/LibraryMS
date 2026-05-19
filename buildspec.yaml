@@ -4,39 +4,45 @@ phases:
   pre_build:
     commands:
       # 기본 경로는 프로젝트 루트 폴더
-      - cd frontend && npm ci   # npm install과 동일하지만 ci/cd에 더 좋음
+      # npm install과 동일하지만 ci/cd에 더 좋음
+      - cd frontend && npm ci
   build:
     commands:
-      - cd frontend && npm run build   # Next.js 빌드
+      # Next.js 빌드
+      - cd frontend && npm run build
+
+      # SpringBoot 빌드
       - chmod +x ./backend/gradlew
       - ./backend/gradlew -p ./backend bootJar -x test
   post_build:
     commands:
-      - mkdir -p deploy-frontend    # deploy-frontend 폴더 생성 (배포할 폴더)
-      - mkdir -p deploy-backend     # deploy-backend 폴더 생성
+      # deploy-frontend, deploy-backend 폴더 생성 (배포할 폴더)
+      - mkdir -p deploy-frontend
+      - mkdir -p deploy-backend
 
       # 프론트엔드 처리
-      - cp -r frontend/.next deploy-frontend/   # .next 폴더 복사
-      - rm -rf deploy-frontend/.next/cache       # .next 폴더에서 cache는 필요 없으므로 삭제
-      - cp frontend/package.json deploy-frontend/   # package.json 복사
-      - cp frontend/package-lock.json deploy-frontend/    # package-lock.json 복사
-      - cp frontend/Procfile deploy-frontend/     # Frontend Procfile 복사
+      - cp -r frontend/.next deploy-frontend/
+      - rm -rf deploy-frontend/.next/cache
+      - cp frontend/package.json deploy-frontend/
+      - cp frontend/package-lock.json deploy-frontend/
+      - cp frontend/Procfile deploy-frontend/
       # next.config.ts가 있으면 복사, 없으면 그냥 넘어감
       - '[ -f frontend/next.config.ts ] && cp frontend/next.config.ts deploy-frontend/ || true'
-      # public 폴더가 있으면 복사, 없으면 그냥 넘어감
       - '[ -d frontend/public ] && cp -r frontend/public deploy-frontend/ || true'
 
       #백엔드 처리
-      - cp backend/build/libs/library-app.jar deploy-backend/   # 빌드 결과물 복사
-      - cp backend/Procfile deploy-backend/       # Backend Procfile 복사
+      - cp backend/build/libs/library-app.jar deploy-backend/
+      - cp backend/Procfile deploy-backend/
 
 # CodeBuild가 빌드 후 어떤 결과물을 CodePipeline으로 넘길지 지정
 artifacts:
   secondary-artifacts:
     frontend-artifact:
       files:
-        - '**/*'    # 모든 파일 포함
-      base-directory: deploy-frontend     # 이 폴더를 기준으로 작업
+        # 모든 파일 포함
+        - '**/*'
+      # 이 폴더를 기준으로 작업
+      base-directory: deploy-frontend
     backend-artifact:
       files:
         - '**/*'
