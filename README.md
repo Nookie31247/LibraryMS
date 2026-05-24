@@ -1,7 +1,7 @@
 # 시연 영상
-로컬 시연: https://drive.google.com/file/d/1iaW1kPsjBTzsECAwE_Gs7x4XW3U1CtX9/view?usp=sharing<br/>
-AWS 설정 및 시연 1: https://drive.google.com/file/d/1xzNTIrXp5D7Bk5Bjep24jWFGFS_qhuu1/view?usp=sharing<br/>
-AWS 설정 및 시연 2: https://drive.google.com/file/d/1wznZSZct9Nmae-d3xTVdohcOJoiw9D7f/view?usp=sharing<br/>
+로컬 시연: https://youtu.be/vGnFzlm68jM <br/>
+AWS 설정 및 시연 1: https://youtu.be/t8A6GnE6v_s <br/>
+AWS 설정 및 시연 2: https://youtu.be/8zG90rmjaA8 <br/>
 <br/>
 실제 접속해보기: https://nookie-server.store/
 
